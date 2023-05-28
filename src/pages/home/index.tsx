@@ -1,8 +1,28 @@
-import { Wrapper } from "./styles"
 import logo from "../../assets/planetchat-background.png"
+import { Wrapper } from "./styles"
 import { TfiYoutube, TfiFacebook, TfiTwitter } from 'react-icons/tfi'
+import { useContext } from "react"
+import { GlobalContext } from "../../contexts/Global/GlobalContext"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup';
+import { IHandleLogin } from "../../contexts/Global/GlobalContext"
 
 export const HomePage = () => {
+
+    const { handleLogin } = useContext(GlobalContext);
+
+    const onErrors = (errors: any)  => console.log(errors);
+
+    const loginForm = yup.object().shape({
+        email: yup.string().email("email inválido").required("Campo obrigatório"),
+        password: yup.string().required("Campo Obrigatório")
+    });
+
+    const {register, handleSubmit, formState: {errors}} = useForm<IHandleLogin>({
+        resolver: yupResolver(loginForm)
+    })
+
     return (
         <Wrapper>
             <div className="container">
@@ -18,13 +38,15 @@ export const HomePage = () => {
                 </section>
                 <section className="loginSection">
                     <div className="box">
-                        <form action="">
+                        <form onSubmit={handleSubmit(handleLogin, onErrors)}>
                             <label htmlFor="email">Email</label>
-                            <input type="text" name="email" placeholder="Digite seu email"/>
-                            <label htmlFor="pass">Senha</label>
-                            <input type="text" name="pass" placeholder="Digite sua senha"/>
+                            <input {...register('email')} type="email" id="email" placeholder="Digite seu email"/>
+                            <span>{errors.email?.message}</span>
+                            <label htmlFor="password">Senha</label>
+                            <input {...register('password')} type="password" id="password" placeholder="Digite sua senha"/>
+                            <span>{errors.password?.message}</span>
                             <div className="btnLogin">
-                                <button type="button">Login</button>
+                            <button type="submit">Login</button>
                             </div>
                         </form>
                             <section className="notRegistered">

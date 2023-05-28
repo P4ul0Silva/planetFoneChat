@@ -56,6 +56,11 @@ font-family: 'Roboto', sans-serif;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
+                        
+                        span{
+                            font-size: 12px;
+                            color: red;
+                        }
 
                         label {
                             margin: 5px 0;

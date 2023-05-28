@@ -1,7 +1,6 @@
 import { RoutesWrapper } from './routes/routes'
 
 function App() {
-
   return (
     <RoutesWrapper/>
   )
