@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 
 export const GlobalContext = createContext({} as GlobalProviderData);
@@ -35,8 +36,12 @@ function GlobalProvider({ children }: GlobalProps) {
 
   useEffect(() => {
   if(!token) {
+    if(window.location.pathname == "/dashboard") {
+      toast.warn("Faça login primeiro")
+    }
     navigate("/home", {replace: true})
     localStorage.clear
+    
   };
 
   }, [token])
@@ -58,9 +63,12 @@ function GlobalProvider({ children }: GlobalProps) {
       .then((response) => {
         console.log(response)
         navigate("/home", { replace: true });
+        toast.success("Usuário cadastrado!")
       })
       .catch((err) => {
         console.log(err)
+        toast.error("Este email já foi cadastrado!")
+        setForm(false);
       });
   };
   
@@ -83,6 +91,7 @@ function GlobalProvider({ children }: GlobalProps) {
         })
         .catch((err) => {
           console.log("Email ou senha inválido", err.message);
+          toast.error("Usuário ou senha inválidos")
         });
     };
 

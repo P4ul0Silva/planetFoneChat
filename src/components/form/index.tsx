@@ -3,11 +3,9 @@ import * as yup from 'yup'
 import { GlobalContext, IHandleForm } from "../../contexts/Global/GlobalContext"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
 import {IoMdReturnLeft} from 'react-icons/io';
 
 export const Form = () => {
-    const navigate = useNavigate()
     
     const { handleLogin, handleRegister, form, setForm } = useContext(GlobalContext);
 

@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { socket } from "../../services/api";
 import { useContext } from "react";
 import { GlobalContext } from "../../contexts/Global/GlobalContext";
-import { useNavigate } from "react-router-dom";
 
 
 export const Dashboard = ()  => {
-    const navigate = useNavigate()
     const [isConnected, setIsConnected] =  useState(socket.connected);
     const [fooEvents, setFooEvents] = useState([])
 

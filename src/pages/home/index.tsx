@@ -1,29 +1,9 @@
 import logo from "../../assets/planetchat-background.png"
 import { Wrapper } from "./styles"
 import { TfiYoutube, TfiFacebook, TfiTwitter } from 'react-icons/tfi'
-import { useContext } from "react"
-import { GlobalContext } from "../../contexts/Global/GlobalContext"
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup';
-import { IHandleForm } from "../../contexts/Global/GlobalContext"
 import { Form } from "../../components/form"
 
 export const HomePage = () => {
-
-    const { handleLogin } = useContext(GlobalContext);
-
-    const onErrors = (errors: any)  => console.log(errors);
-
-    const loginForm = yup.object().shape({
-        email: yup.string().email("email inválido").required("Campo obrigatório"),
-        password: yup.string().required("Campo Obrigatório")
-    });
-
-    const {register, handleSubmit, formState: {errors}} = useForm<IHandleForm>({
-        resolver: yupResolver(loginForm)
-    })
-
     return (
         <Wrapper>
             <div className="container">
