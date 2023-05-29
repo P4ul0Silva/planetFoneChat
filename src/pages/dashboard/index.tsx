@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { socket } from "../../services/api";
+import { useContext } from "react";
+import { GlobalContext } from "../../contexts/Global/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const Dashboard = ()  => {
-
+    const navigate = useNavigate()
     const [isConnected, setIsConnected] =  useState(socket.connected);
     const [fooEvents, setFooEvents] = useState([])
 
+    const {logout} = useContext(GlobalContext)
+
   useEffect(()  => {
+
     function onConnect() {
       setIsConnected(true);
     }
@@ -39,6 +45,7 @@ export const Dashboard = ()  => {
             </textarea>
             <button onClick={() => socket.connect()}>Connect</button>
             <button onClick={() => socket.disconnect()}>Disconnect</button>
+            <button onClick={() => logout()}>Logout</button>
         </div>
     )
 }

@@ -6,7 +6,8 @@ import { GlobalContext } from "../../contexts/Global/GlobalContext"
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
-import { IHandleLogin } from "../../contexts/Global/GlobalContext"
+import { IHandleForm } from "../../contexts/Global/GlobalContext"
+import { Form } from "../../components/form"
 
 export const HomePage = () => {
 
@@ -19,7 +20,7 @@ export const HomePage = () => {
         password: yup.string().required("Campo Obrigatório")
     });
 
-    const {register, handleSubmit, formState: {errors}} = useForm<IHandleLogin>({
+    const {register, handleSubmit, formState: {errors}} = useForm<IHandleForm>({
         resolver: yupResolver(loginForm)
     })
 
@@ -37,22 +38,7 @@ export const HomePage = () => {
                     
                 </section>
                 <section className="loginSection">
-                    <div className="box">
-                        <form onSubmit={handleSubmit(handleLogin, onErrors)}>
-                            <label htmlFor="email">Email</label>
-                            <input {...register('email')} type="email" id="email" placeholder="Digite seu email"/>
-                            <span>{errors.email?.message}</span>
-                            <label htmlFor="password">Senha</label>
-                            <input {...register('password')} type="password" id="password" placeholder="Digite sua senha"/>
-                            <span>{errors.password?.message}</span>
-                            <div className="btnLogin">
-                            <button type="submit">Login</button>
-                            </div>
-                        </form>
-                            <section className="notRegistered">
-                                <a href="#">Ainda não tem cadastro?</a>
-                            </section>
-                    </div>
+                    <Form/>
                 </section>
             </div>
             <footer>

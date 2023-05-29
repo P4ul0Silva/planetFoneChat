@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
@@ -10,27 +10,61 @@ interface GlobalProps {
   children: ReactNode;
 }
 
-export interface IHandleLogin {
+export interface IHandleForm {
     email: string;
     password: string;
+    confirmPassword?: string;
+    firstName?: string;
+    lastName?: string;
+
   }
 
 interface GlobalProviderData {
   logout: () => void;
-  handleLogin: (data: IHandleLogin) => void;
+  handleLogin: (data: IHandleForm) => void;
+  form: Boolean;
+  setForm: React.Dispatch<React.SetStateAction<boolean>>
+  handleRegister: (data: IHandleForm) => void;
 }
 
 function GlobalProvider({ children }: GlobalProps) {
+  const token = localStorage.getItem("@planetchat: UserToken")
   const navigate = useNavigate();
+  const [form, setForm] = useState(true)
+  
+
+  useEffect(() => {
+  if(!token) {
+    navigate("/home", {replace: true})
+    localStorage.clear
+  };
+
+  }, [token])
+
 
   const logout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/home");
   };
 
+  const handleRegister = (data: IHandleForm) => {
+    api
+      .post("/users", {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      })
+      .then((response) => {
+        console.log(response)
+        navigate("/home", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  };
   
-  const handleLogin = (data: IHandleLogin) => {
-      console.log(data)
+  const handleLogin = (data: IHandleForm) => {
       api
         .post("/auth/login", data)
         .then((response) => {
@@ -40,12 +74,10 @@ function GlobalProvider({ children }: GlobalProps) {
             response.data.accessToken
           );
           console.log(response.data)
-          if(!response.data.userId) alert("global context 32")
           window.localStorage.setItem("@planetchat: UserID", response.data.userId);
-          // setUser(response.data.user);
             console.log(response.status)
           if (response.status === 201) {
-          //   toast.success("Login realizado com sucesso");
+              setForm(true)
               navigate("/dashboard", { replace: true });
           }
         })
@@ -55,7 +87,7 @@ function GlobalProvider({ children }: GlobalProps) {
     };
 
   return (
-    <GlobalContext.Provider value={{ logout, handleLogin }}>
+    <GlobalContext.Provider value={{ logout, handleLogin, handleRegister, form, setForm }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -48,9 +48,8 @@ font-family: 'Roboto', sans-serif;
                 .box {
                     display: flex;
                     width: 100%;
-                    height: 50%;
+                    height: 70%;
                     justify-content: space-around;
-
                     border-left: 1px solid var(--gray-color-1);
                     form {
                         display: flex;
@@ -69,10 +68,28 @@ font-family: 'Roboto', sans-serif;
                         }
 
                         input {
+                            color: #ffffff;
                             margin: 5px auto;
                             background: none;
                             border: none;
-                        }
+                        } & :focus { outline: 1px solid gray; border-radius: 5px}
+
+                        button {
+                                width: 100%;
+                                height: 100%;
+                                background: none;
+                                border: none;
+                                color: #ffffff;
+                                font-weight: 700;
+                                cursor: pointer;
+                            } 
+                            
+                            button:hover {
+                                background-color: #007fb4;
+                                border-radius: 5px;
+                                transition: ease .5s;
+
+                            }
 
                         .btnLogin {
                             display: flex;
@@ -83,19 +100,6 @@ font-family: 'Roboto', sans-serif;
                             height: 40px;
                             background-color: #009ee0;
                             border-radius: 5px;
-                            button {
-                                width: 100%;
-                                height: 100%;
-                                background: none;
-                                border: none;
-                                color: #ffffff;
-                                font-weight: 700;
-                                cursor: pointer;
-                            } & :hover {
-                            background-color: #007fb4;
-                            border-radius: 5px;
-                        }
-                            
                         } 
                     }
                 }
@@ -108,7 +112,12 @@ font-family: 'Roboto', sans-serif;
                     a {
                         color: #009ee0;
                         text-decoration: none;
-                    }
+                        cursor: pointer;
+                    } & :hover { color: #007fb4}
+
+                    svg {
+                        cursor: pointer;
+                    } & :hover { color: #007fb4}
                 }
 
                 @media screen and (max-width:650px) {
