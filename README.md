@@ -1,4 +1,4 @@
-# planetFoneChat
+# Planet Chat
 Aplicação de chat em tempo real utilizando WebSocket com autenticação. 
 
 ### Para instalar o back-end leia o readme em:
