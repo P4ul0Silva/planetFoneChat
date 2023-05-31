@@ -35,6 +35,7 @@ A aplicação vai estar rodando localmente
 ```bash
 http://localhost:5173 
 ```
-![image](https://github.com/P4ul0Silva/planetFoneChat/assets/79770252/56eebb5d-a413-47c5-abbd-3508ec18a846)
+![image](https://github.com/P4ul0Silva/planetFoneChat/assets/79770252/311e9153-03d4-45dd-a4d4-77d1d026414f)
+
 
 
