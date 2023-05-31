@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import * as yup from 'yup'
-import { GlobalContext, IHandleForm } from "../../contexts/Global/GlobalContext"
+import { IHandleForm, UserContext } from "../../contexts/Users/UserContext"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {IoMdReturnLeft} from 'react-icons/io';
 
 export const Form = () => {
     
-    const { handleLogin, handleRegister, form, setForm } = useContext(GlobalContext);
+    const { handleLogin, handleRegister, form, setForm } = useContext(UserContext);
 
     const onErrors = (errors: any)  => console.log(errors);
 
@@ -16,7 +16,7 @@ export const Form = () => {
             handleLogin(data);
         } else {
             handleRegister(data);
-            setForm(!form)
+            setForm(!form);
         }
         
     }
@@ -50,7 +50,7 @@ export const Form = () => {
                 )}
                 {!form && (
                     <>
-                    <label htmlFor="lastName">Nome</label>
+                    <label htmlFor="lastName">Sobrenome</label>
                     <input {...register('lastName')} type="text" id="lastName" placeholder="Digite seu sobrenome" tabIndex={2}/>
                     <span>{errors.lastName?.message}</span>
                     </>

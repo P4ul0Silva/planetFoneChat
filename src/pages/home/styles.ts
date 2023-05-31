@@ -8,7 +8,7 @@ font-family: 'Roboto', sans-serif;
     display: flex;
     width: 100vw;
     min-height: 100vh;
-    background-color: rgba(29, 29, 42, 1);
+    background-color: var(--background);
     color: #ffffff;
     overflow: hidden;
 

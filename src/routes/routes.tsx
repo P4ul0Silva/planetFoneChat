@@ -6,8 +6,9 @@ export const RoutesWrapper = () => {
 
     return (
         <Routes>
-            <Route path='/home' Component={HomePage}/>
-            <Route path='/dashboard' Component={Dashboard}/>
+            <Route path='/' Component={HomePage}/>
+            <Route path='dashboard' Component={Dashboard}/>
+            <Route path="*" Component={HomePage}/>
         </Routes>
     )
 }

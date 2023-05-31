@@ -7,10 +7,6 @@ ${normalize}
 :root{
   //primary colors
   --primary-color: #009ee0;
-  --primary-focus-color: #009ee0;
-  --primary-2-color: #3E1E51;
-  --primary-2-focus-color: #BF90DC;
-  --primary-3-color: #45205C;
 
 
   //gray scale
@@ -27,11 +23,35 @@ ${normalize}
   --sucess-color:#48AD18;
   --negative-color:#FA5640;
 
+  --background: rgba(29, 29, 42, 1);
+
   --box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 * {
-    /* outline: 1px solid red; */
+
+    ul {
+      padding: 0;
+    }
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track{
+    background: var(--gray-color-1);
+    margin: 1rem;
+    border-radius: 1.6rem;
+}
+
+::-webkit-scrollbar-thumb{
+    background: white;
+    border-radius: 1.6rem;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: var(--primary-focus-color);
+}
 }
 
 `

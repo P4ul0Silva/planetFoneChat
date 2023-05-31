@@ -1,19 +1,33 @@
-import logo from "../../assets/planetchat-background.png"
-import { Wrapper } from "./styles"
-import { TfiYoutube, TfiFacebook, TfiTwitter } from 'react-icons/tfi'
-import { Form } from "../../components/form"
+import logo from "../../assets/planetchat-background.png";
+import { Wrapper } from "./styles";
+import { TfiYoutube, TfiFacebook, TfiTwitter } from 'react-icons/tfi';
+import { Form } from "../../components/form";
+import { useContext, useEffect } from "react";
+import { socket } from "../../services/api";
+import { toast } from "react-toastify";
+import { UserContext } from "../../contexts/Users/UserContext";
+
+
 
 export const HomePage = () => {
+    const { token } = useContext(UserContext);
+
+    useEffect(() => {
+        if(!token) {
+            window.localStorage.clear();
+        }
+    }, []);
+
     return (
         <Wrapper>
             <div className="container">
                 <section className="welcomeSection">
                     <div className="imageDiv">
-                        <img src={logo} alt="" />
+                        <img src={logo} alt="logo" />
                         <div className="description">
-                        <h2>Conecte-se com a comunidade!</h2>
-                        <p>Bate papo simples e rápido</p>
-                    </div>
+                            <h2>Conecte-se com a comunidade!</h2>
+                            <p>Bate papo simples e rápido</p>
+                        </div>
                     </div>
                     
                 </section>
@@ -37,4 +51,4 @@ export const HomePage = () => {
             </footer>
         </Wrapper>
     )
-}
+};
