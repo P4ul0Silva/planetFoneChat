@@ -87,12 +87,22 @@ export const Wrapper = styled.div`
                 align-self: center;
             }
 
+            .delimiter {
+                height: 30px;
+                border-top: 1px inset gray;
+                width: 25%;
+                align-self: center;
+                text-align: center;
+                font-size: 12px;
+                padding: 10px;
+            }
+
             .message {
                 h4 {
                     margin: 1px;
                 }
                 p {
-                    margin-bottom: 0;
+                    margin-bottom: 5px;
                 }
                 span {
                     font-size: 10px;

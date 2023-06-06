@@ -44,8 +44,12 @@ export const Dashboard = ()  => {
       };
 
       function formatTime(date: Date) {
-        const time = new Date(date)
-        return ( <span>{`${time.getHours()}:${time.getMinutes() > 10 ? time.getMinutes() : "0"+time.getMinutes()}`}</span>)
+        const time = new Date(date);
+        const now = new Date();
+        const isAfterTime = now.toDateString() !== time.toDateString();
+        const todayTime = ( <span>{`${time.getHours()}:${time.getMinutes() > 10 ? time.getMinutes() : "0"+time.getMinutes()}`}</span>);
+        const afterTime = (<span>{`${time.toLocaleDateString()}, ${time.getHours()}:${time.getMinutes() > 10 ? time.getMinutes() : "0"+time.getMinutes()}`}</span>);
+        return isAfterTime ? afterTime : todayTime;
       }
 
     useEffect(() => {
@@ -81,12 +85,21 @@ export const Dashboard = ()  => {
           <div className="messageContainer">
             <header><p>Home</p></header>
             <div ref={messageBoxDiv} className="chatBox">
-              {messagesHistory?.map((message) => (
-                <div className={`${message.userName == userFullName ? 'message ownMessage' : 'message'}`} key={message.id}>
+              {messagesHistory?.map((message, index, arr) => (
+                <>
+                <div key={index} className={`${message.userName == userFullName ? 'message ownMessage' : 'message'}`}>
                   <h4>{`${message.userName == userFullName ? 'Você' :  message.userName}`}</h4>
                   <p>{message.text}</p>
                   <span>{formatTime(message.createdAt)}</span>
                 </div>
+                {new Date(message.createdAt).getDay() !== new Date(arr[index+1 > arr.length-1 ? index : index+1].createdAt).getDay() && (
+                  <>
+                  <div className="delimiter">
+                  <span>{`${new Date(arr[arr.length-1].createdAt).toLocaleDateString() === new Date().toLocaleDateString() ? 'Hoje' : new Date(arr[arr.length-1].createdAt).toLocaleDateString()}`}</span>
+                  </div>
+                  </>
+                  )}
+                </>
               ))}
               {isNewMessage && 
               <div className="scrollArrow" onClick={() => handleScrollToLastMessage(false)}>
